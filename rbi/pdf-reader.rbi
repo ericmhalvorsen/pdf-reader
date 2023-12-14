@@ -326,9 +326,6 @@ module PDF
       sig { returns(T.nilable(Symbol)) }
       attr_reader :basefont
 
-      sig { returns(T.nilable(PDF::Reader::FontDescriptor)) }
-      attr_reader :font_descriptor
-
       sig { returns(T::Array[Numeric]) }
       attr_reader :cid_widths
 
@@ -367,9 +364,6 @@ module PDF
       def extract_base_info(obj); end
 
       sig { params(obj: T.untyped).void }
-      def extract_descriptor(obj); end
-
-      sig { params(obj: T.untyped).void }
       def extract_descendants(obj); end
 
       sig { params(params: T.any(Integer, String, T::Array[T.untyped])).returns(String) }
@@ -377,68 +371,6 @@ module PDF
 
       sig { params(params: T.any(Integer, String, T::Array[T.untyped])).returns(String) }
       def to_utf8_via_encoding(params); end
-    end
-
-    class FontDescriptor
-      sig { returns(String) }
-      attr_reader :font_name
-
-      sig { returns(T.nilable(String)) }
-      attr_reader :font_family
-
-      sig { returns(Symbol) }
-      attr_reader :font_stretch
-
-      sig { returns(Numeric) }
-      attr_reader :font_weight
-
-      sig { returns(T::Array[Numeric]) }
-      attr_reader :font_bounding_box
-
-      sig { returns(Numeric) }
-      attr_reader :cap_height
-
-      sig { returns(Numeric) }
-      attr_reader :ascent
-
-      sig { returns(Numeric) }
-      attr_reader :descent
-
-      sig { returns(Numeric) }
-      attr_reader :leading
-
-      sig { returns(Numeric) }
-      attr_reader :avg_width
-
-      sig { returns(Numeric) }
-      attr_reader :max_width
-
-      sig { returns(Numeric) }
-      attr_reader :missing_width
-
-      sig { returns(T.nilable(Numeric)) }
-      attr_reader :italic_angle
-
-      sig { returns(T.nilable(Numeric)) }
-      attr_reader :stem_v
-
-      sig { returns(T.nilable(Numeric)) }
-      attr_reader :x_height
-
-      sig { returns(Integer) }
-      attr_reader :font_flags
-
-      sig { params(ohash: PDF::Reader::ObjectHash, fd_hash: T::Hash[T.untyped, T.untyped]).void }
-      def initialize(ohash, fd_hash); end
-
-      sig { params(char_code: Integer).returns(Numeric) }
-      def glyph_width(char_code); end
-
-      sig { returns(Numeric) }
-      def glyph_to_pdf_scale_factor; end
-
-      sig { returns(TTFunk::File) }
-      def ttf_program_stream; end
     end
 
     class FormXObject

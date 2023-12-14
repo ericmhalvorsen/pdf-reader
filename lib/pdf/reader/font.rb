@@ -44,7 +44,6 @@ class PDF::Reader
 
       extract_base_info(obj)
       extract_type3_info(obj)
-      extract_descriptor(obj)
       extract_descendants(obj)
       @width_calc = build_width_calculator
 
@@ -190,17 +189,6 @@ class PDF::Reader
         @font_matrix = @ohash.deref_array_of_numbers(obj[:FontMatrix]) || [
           0.001, 0, 0, 0.001, 0, 0
         ]
-      end
-    end
-
-    def extract_descriptor(obj)
-      if obj[:FontDescriptor]
-        # create a font descriptor object if we can, in other words, unless this is
-        # a CID Font
-        fd = @ohash.deref_hash(obj[:FontDescriptor])
-        @font_descriptor = PDF::Reader::FontDescriptor.new(@ohash, fd)
-      else
-        @font_descriptor = nil
       end
     end
 
